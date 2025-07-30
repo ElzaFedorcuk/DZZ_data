@@ -1,0 +1,144 @@
+# **The Art of DZZ (Drone Zone Zoom): Exploring the Thrills of FPV Drone Racing**
+
+## **Introduction to DZZ (Drone Zone Zoom)**  
+DZZ, commonly known as **Drone Zone Zoom**, is an exhilarating aspect of **First-Person View (FPV) drone racing and freestyle flying**. It combines high-speed maneuvers, precise control, and immersive FPV technology to create an adrenaline-pumping experience for pilots and spectators alike. Whether you're a beginner or a seasoned drone enthusiast, DZZ offers endless opportunities for creativity, competition, and technical mastery.
+
+---
+
+## **The Basics of DZZ**  
+### **1. What is DZZ?**  
+DZZ refers to the dynamic flying style where pilots navigate drones through complex zones—such as race tracks, urban environments, or natural landscapes—at high speeds while performing sharp turns, dives, and flips. The term emphasizes **speed, agility, and flow**, making it a core element of modern FPV drone culture.
+
+### **2. Key Components of DZZ**  
+To master DZZ, pilots need:  
+- **A high-performance FPV drone** (5" freestyle or racing quadcopters are popular).  
+- **Low-latency FPV goggles** for real-time video feedback.  
+- **A responsive radio transmitter** (e.g., TBS Tango, Radiomaster Boxer).  
+- **Durable batteries (LiPo)** for sustained high-speed flights.  
+- **A well-designed flying zone** (gates, obstacles, or open spaces for freestyle).  
+
+---
+
+## **The Thrill of DZZ: Racing vs. Freestyle**  
+### **1. Drone Racing**  
+FPV drone racing is a competitive sport where pilots navigate through **predefined courses** at breakneck speeds (often exceeding 80-100 mph). Races are held in organized leagues like:  
+- **DRL (Drone Racing League)**  
+- **MultiGP**  
+- **Local club competitions**  
+
+**Key Skills for Racing:**  
+✔ **Precision flying** (threading through tight gates).  
+✔ **Efficient power management** (to avoid mid-race crashes).  
+✔ **Quick reflexes** (reacting to sudden course changes).  
+
+### **2. Freestyle Flying**  
+Freestyle DZZ focuses on **aerial acrobatics and creative expression**. Pilots perform:  
+- **Power loops**  
+- **Matty flips**  
+- **Dives and proximity flying**  
+Popular freestyle pilots like **Johnny FPV, Mr. Steele, and Nurk FPV** have pushed the limits of what’s possible.  
+
+**Key Skills for Freestyle:**  
+✔ **Smooth control inputs** (for cinematic flow).  
+✔ **Risk assessment** (avoiding crashes in risky maneuvers).  
+✔ **Creative line selection** (finding unique angles and gaps).  
+
+---
+
+## **How to Get Started with DZZ**  
+### **1. Choose Your Gear**  
+- **Beginner Option:** TinyWhoop (small, durable, indoor-friendly).  
+- **Intermediate:** 3" or 5" freestyle drone (e.g., iFlight Nazgul, GEPRC Mark5).  
+- **Advanced:** Custom-built racing quad with high-end components.  
+
+### **2. Learn the Controls**  
+- **Throttle:** Controls altitude.  
+- **Yaw:** Rotates left/right.  
+- **Pitch/Roll:** Moves forward/backward and side-to-side.  
+
+### **3. Practice in Simulators**  
+Before flying real drones, use **FPV simulators** like:  
+- **Velocidrone** (best for racing).  
+- **Liftoff** (great for freestyle).  
+- **DRL Simulator** (official racing simulator).  
+
+### **4. Join the Community**  
+- **Online forums** (FPV subreddit, Discord groups).  
+- **Local flying clubs** (find races and meet experienced pilots).  
+- **YouTube tutorials** (for tips on tuning and advanced tricks).  
+
+---
+
+## **The Future of DZZ**  
+As drone technology evolves, DZZ continues to grow with:  
+- **AI-assisted racing drones** (for automated obstacle avoidance).  
+- **Improved battery life** (longer flight times).  
+- **VR/AR integration** (more immersive FPV experiences).  
+
+Whether you're into **competitive racing or artistic freestyle**, DZZ offers an unmatched blend of **technology, skill, and excitement**.  
+
+---
+
+### **Final Thoughts**  
+DZZ (Drone Zone Zoom) is more than just a hobby—it’s a **high-speed, high-skill sport** that challenges both the mind and reflexes. With the right gear, practice, and passion, anyone can dive into the world of FPV drones and experience the thrill of flying like never before.  
+
+**Are you ready to take off?** 🚁💨  
+
+*(Word count: ~600 | Expandable with more technical details, interviews, or event highlights.)*  
+
+Would you like a deeper dive into any specific aspect of DZZ? 😊
+
+1. build.gradle rest
+
+    implementation 'io.jmix.rest:jmix-rest-starter'
+    implementation 'io.jmix.security:jmix-security-oauth2-starter'
+
+собрать проект (значок обновить)
+
+2. application.properties написать rest
+jmix.rest.anonymous-url-patterns = \
+  /main/services, \
+  /main/pay
+
+3. в проекта создать папку на пути src\main\java\com....\app, внутри создать класс java Controller
+
+написать внутри
+
+package com.company.work_techik.app;
+
+import com.company.work_techik.entity.Pay;
+import com.company.work_techik.entity.Service;
+import io.jmix.core.DataManager;
+import io.jmix.core.UnconstrainedDataManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/main")
+
+public class Controler {
+
+    @Autowired
+    private UnconstrainedDataManager dataManager;
+
+    @GetMapping("/services")
+    public ResponseEntity<List<Service>> getData(){
+        return new ResponseEntity<>(dataManager.load(Service.class)
+                .all().list(),HttpStatus.OK);
+
+    }
+
+    @GetMapping("/pay")
+    public ResponseEntity<List<Pay>> getDataPay(){
+        return new ResponseEntity<>(dataManager.load(Pay.class)
+                .all().list(),HttpStatus.OK);
+
+    }
+
+}
