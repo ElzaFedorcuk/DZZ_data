@@ -88,57 +88,5 @@ DZZ (Drone Zone Zoom) is more than just a hobby—it’s a **high-speed, high-sk
 
 Would you like a deeper dive into any specific aspect of DZZ? 😊
 
-1. build.gradle rest
 
-    implementation 'io.jmix.rest:jmix-rest-starter'
-    implementation 'io.jmix.security:jmix-security-oauth2-starter'
-
-собрать проект (значок обновить)
-
-2. application.properties написать rest
-jmix.rest.anonymous-url-patterns = \
-  /main/services, \
-  /main/pay
-
-3. в проекта создать папку на пути src\main\java\com....\app, внутри создать класс java Controller
-
-написать внутри
-
-package com.company.work_techik.app;
-
-import com.company.work_techik.entity.Pay;
-import com.company.work_techik.entity.Service;
-import io.jmix.core.DataManager;
-import io.jmix.core.UnconstrainedDataManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-
-@RestController
-@RequestMapping("/main")
-
-public class Controler {
-
-    @Autowired
-    private UnconstrainedDataManager dataManager;
-
-    @GetMapping("/services")
-    public ResponseEntity<List<Service>> getData(){
-        return new ResponseEntity<>(dataManager.load(Service.class)
-                .all().list(),HttpStatus.OK);
-
-    }
-
-    @GetMapping("/pay")
-    public ResponseEntity<List<Pay>> getDataPay(){
-        return new ResponseEntity<>(dataManager.load(Pay.class)
-                .all().list(),HttpStatus.OK);
-
-    }
-
-}
+ну что ж........
